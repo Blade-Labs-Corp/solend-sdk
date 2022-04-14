@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "docs": "typedoc",
-    "prepublish": "yarn build",
+    "prepublish": "npm run build",
     "build": "rm -rf dist/; tsc",
     "test": "jest",
     "coverage": "jest --coverage",
