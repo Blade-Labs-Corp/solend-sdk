@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { AccountInfo, Connection, PublicKey } from "@solana/web3.js";
-import { ConfigType } from "./types";
+import { ConfigType, EnviromentConfig } from "./types";
 import BigNumber from "bignumber.js";
 import { parseReserve } from "../state/reserve";
 import { Obligation, parseObligation } from "../state/obligation";
@@ -105,13 +105,13 @@ export class SolendMarket {
 
   static async initialize(
     connection: Connection,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     marketAddress?: string
   ) {
     const market = new SolendMarket(connection);
-    const rawConfig = (await (
+    const rawConfig = typeof environment == "string" ? (await (
       await axios.get(`${API_ENDPOINT}/v1/config?deployment=${environment}`)
-    ).data) as ConfigType;
+    ).data) as ConfigType : environment;
     market.config = formatReserveConfig(rawConfig, marketAddress);
     market.reserves = market.config.reserves.map(
       (res) => new SolendReserve(res, market, connection)

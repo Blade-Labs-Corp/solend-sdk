@@ -41,3 +41,5 @@ export type ReserveType = {
   liquidityFeeReceiverAddress: string;
   userSupplyCap?: number;
 };
+
+export type EnviromentConfig = "production" | "devnet" | ConfigType;

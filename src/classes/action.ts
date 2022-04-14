@@ -22,6 +22,7 @@ import {
   ReserveType,
   MarketType,
   ConfigType,
+  EnviromentConfig,
   OracleAssetType,
 } from "./types";
 import BN from "bn.js";
@@ -169,13 +170,13 @@ export class SolendAction {
     symbol: string,
     publicKey: PublicKey,
     connection: Connection,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey,
     hostAta?: PublicKey
   ) {
-    const solendInfo = (await (
+    const solendInfo = typeof environment == "string" ? (await (
       await axios.get(`${API_ENDPOINT}/v1/config?deployment=${environment}`)
-    ).data) as ConfigType;
+    ).data) as ConfigType : environment;
 
     const lendingMarket =
       solendInfo.markets.find(
@@ -281,7 +282,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey
   ) {
     const axn = await SolendAction.initialize(
@@ -305,7 +306,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     hostAta?: PublicKey,
     lendingMarketAddress?: PublicKey
   ) {
@@ -330,7 +331,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey
   ) {
     const axn = await SolendAction.initialize(
@@ -352,7 +353,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey
   ) {
     const axn = await SolendAction.initialize(
@@ -374,7 +375,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey
   ) {
     const axn = await SolendAction.initialize(
@@ -396,7 +397,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey
   ) {
     const axn = await SolendAction.initialize(
@@ -420,7 +421,7 @@ export class SolendAction {
     amount: string | BN,
     symbol: string,
     publicKey: PublicKey,
-    environment: "production" | "devnet" = "production",
+    environment: EnviromentConfig,
     lendingMarketAddress?: PublicKey
   ) {
     const axn = await SolendAction.initialize(

@@ -1,21 +1,12 @@
-**Note: The Solend TS is in early stages of release and is subject to changes and improvements. To report any bugs or feature requests, the #dev-support channel in the [Solend Discord](https://discord.gg/aGXvPNGXDT) is the fastest way to get a response.**
-
 ## Installation
 
 ```
-yarn add @solendprotocol/solend-sdk
+npm install @solendprotocol/solend-sdk
 ```
 
 # Solend Typescript SDK
 
-This is the Solend Typescript to interact with http://solend.fi.
-
-For the full set of developer tools, check out the brand new
-
-[
-<img width="200" alt="Screen Shot 2022-01-09 at 5 54 30 PM" src="https://user-images.githubusercontent.com/89805726/148710356-a6cdb798-934a-459d-b795-d4a1099168db.png">](https://dev.solend.fi/)
-
-[Latest API documentation](http://sdk.solend.fi/)
+This is the Solend Typescript to interact with http://solend.fi. Improved by allowing the use of custom lending pools!
 
 ## Basic usage
 
@@ -26,7 +17,7 @@ For the full set of developer tools, check out the brand new
 // 1. Initalize market with parameters and metadata
 const market = await SolendMarket.initialize(
   connection,
-  'production', // optional environment argument
+  'production', // optional environment argument, you can use the generateConfig function if you're using a custom pool
   new PublicKey('7RCz8wb6WXxUhAigok9ttgrVgDFFFbibcirECzWSBauM'), // optional market address (TURBO SOL). Defaults to 'Main' market
 );
 console.log(market.reserves.map(reserve => reserve.config.loanToValueRatio));

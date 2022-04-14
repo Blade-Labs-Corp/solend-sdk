@@ -24,13 +24,15 @@
     "axios": "^0.24.0",
     "bignumber.js": "^9.0.2",
     "bn.js": "^5.2.0",
+    "bs58": "^4.0.1",
     "buffer": "^6.0.3",
     "buffer-layout": "^1.2.0",
     "isomorphic-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.3",
     "@types/bn.js": "^5.1.0",
+    "@types/bs58": "^4.0.1",
+    "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "eslint": "^8.4.0",
