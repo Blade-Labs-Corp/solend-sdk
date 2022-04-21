@@ -1,7 +1,7 @@
 ## Installation
 
 ```
-npm install @solendprotocol/solend-sdk
+npm install git+ssh://git@github.com:Blade-Labs-Corp/solend-sdk.git
 ```
 
 # Solend Typescript SDK
