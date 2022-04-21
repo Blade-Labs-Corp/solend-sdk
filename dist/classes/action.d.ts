@@ -29,14 +29,14 @@ export declare class SolendAction {
     depositReserves: Array<PublicKey>;
     borrowReserves: Array<PublicKey>;
     private constructor();
-    static initialize(action: ActionType, amount: string | BN, symbol: string, publicKey: PublicKey, connection: Connection, environment: EnviromentConfig, lendingMarketAddress?: PublicKey, hostAta?: PublicKey): Promise<SolendAction>;
-    static buildDepositTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
-    static buildBorrowTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, hostAta?: PublicKey, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
-    static buildDepositReserveLiquidityTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
-    static buildRedeemReserveCollateralTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
-    static buildDepositObligationCollateralTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
-    static buildWithdrawTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
-    static buildRepayTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static initialize(action: ActionType, amount: string | BN, symbol: string, publicKey: PublicKey, connection: Connection, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey, hostAta?: PublicKey): Promise<SolendAction>;
+    static buildDepositTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static buildBorrowTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, hostAta?: PublicKey, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static buildDepositReserveLiquidityTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static buildRedeemReserveCollateralTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static buildDepositObligationCollateralTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static buildWithdrawTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
+    static buildRepayTxns(connection: Connection, amount: string | BN, symbol: string, publicKey: PublicKey, environment?: EnviromentConfig, lendingMarketAddress?: PublicKey): Promise<SolendAction>;
     getTransactions(): Promise<{
         preLendingTxn: Transaction | null;
         lendingTxn: Transaction | null;

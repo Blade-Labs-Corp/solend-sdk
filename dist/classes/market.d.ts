@@ -47,7 +47,7 @@ export declare class SolendMarket {
     config: FormattedMarketConfig | null;
     private connection;
     private constructor();
-    static initialize(connection: Connection, environment: EnviromentConfig, marketAddress?: string): Promise<SolendMarket>;
+    static initialize(connection: Connection, environment?: EnviromentConfig, marketAddress?: string): Promise<SolendMarket>;
     fetchObligationByWallet(publicKey: PublicKey): Promise<SolendObligation | null>;
     loadAll(): Promise<void>;
     private loadLMRewardData;

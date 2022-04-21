@@ -62,7 +62,7 @@ class SolendMarket {
         this.rewardsData = null;
         this.config = null;
     }
-    static initialize(connection, environment, marketAddress) {
+    static initialize(connection, environment = "production", marketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const market = new SolendMarket(connection);
             const rawConfig = typeof environment == "string" ? (yield (yield axios_1.default.get(`${API_ENDPOINT}/v1/config?deployment=${environment}`)).data) : environment;

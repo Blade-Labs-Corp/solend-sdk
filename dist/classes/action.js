@@ -62,7 +62,7 @@ class SolendAction {
         this.depositReserves = depositReserves;
         this.borrowReserves = borrowReserves;
     }
-    static initialize(action, amount, symbol, publicKey, connection, environment, lendingMarketAddress, hostAta) {
+    static initialize(action, amount, symbol, publicKey, connection, environment = "production", lendingMarketAddress, hostAta) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
             const solendInfo = typeof environment == "string" ? (yield (yield axios_1.default.get(`${API_ENDPOINT}/v1/config?deployment=${environment}`)).data) : environment;
@@ -108,7 +108,7 @@ class SolendAction {
             return new SolendAction(solendInfo, connection, reserve, lendingMarket, tokenInfo, publicKey, obligationAddress, obligationDetails, userTokenAccountAddress, userCollateralAccountAddress, seed, symbol, distinctReserveCount, amount, depositReserves, borrowReserves, hostAta);
         });
     }
-    static buildDepositTxns(connection, amount, symbol, publicKey, environment, lendingMarketAddress) {
+    static buildDepositTxns(connection, amount, symbol, publicKey, environment = "production", lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("deposit", amount, symbol, publicKey, connection, environment, lendingMarketAddress);
             yield axn.addSupportIxs("deposit");
@@ -116,7 +116,7 @@ class SolendAction {
             return axn;
         });
     }
-    static buildBorrowTxns(connection, amount, symbol, publicKey, environment, hostAta, lendingMarketAddress) {
+    static buildBorrowTxns(connection, amount, symbol, publicKey, environment = "production", hostAta, lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("borrow", amount, symbol, publicKey, connection, environment, lendingMarketAddress, hostAta);
             yield axn.addSupportIxs("borrow");
@@ -124,7 +124,7 @@ class SolendAction {
             return axn;
         });
     }
-    static buildDepositReserveLiquidityTxns(connection, amount, symbol, publicKey, environment, lendingMarketAddress) {
+    static buildDepositReserveLiquidityTxns(connection, amount, symbol, publicKey, environment = "production", lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("mint", amount, symbol, publicKey, connection, environment, lendingMarketAddress);
             yield axn.addSupportIxs("mint");
@@ -132,7 +132,7 @@ class SolendAction {
             return axn;
         });
     }
-    static buildRedeemReserveCollateralTxns(connection, amount, symbol, publicKey, environment, lendingMarketAddress) {
+    static buildRedeemReserveCollateralTxns(connection, amount, symbol, publicKey, environment = "production", lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("redeem", amount, symbol, publicKey, connection, environment, lendingMarketAddress);
             yield axn.addSupportIxs("redeem");
@@ -140,7 +140,7 @@ class SolendAction {
             return axn;
         });
     }
-    static buildDepositObligationCollateralTxns(connection, amount, symbol, publicKey, environment, lendingMarketAddress) {
+    static buildDepositObligationCollateralTxns(connection, amount, symbol, publicKey, environment = "production", lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("depositCollateral", amount, symbol, publicKey, connection, environment, lendingMarketAddress);
             yield axn.addSupportIxs("depositCollateral");
@@ -148,7 +148,7 @@ class SolendAction {
             return axn;
         });
     }
-    static buildWithdrawTxns(connection, amount, symbol, publicKey, environment, lendingMarketAddress) {
+    static buildWithdrawTxns(connection, amount, symbol, publicKey, environment = "production", lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("withdraw", amount, symbol, publicKey, connection, environment, lendingMarketAddress);
             yield axn.addSupportIxs("withdraw");
@@ -156,7 +156,7 @@ class SolendAction {
             return axn;
         });
     }
-    static buildRepayTxns(connection, amount, symbol, publicKey, environment, lendingMarketAddress) {
+    static buildRepayTxns(connection, amount, symbol, publicKey, environment = "production", lendingMarketAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             const axn = yield SolendAction.initialize("repay", amount, symbol, publicKey, connection, environment, lendingMarketAddress);
             yield axn.addSupportIxs("repay");
