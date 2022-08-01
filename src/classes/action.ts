@@ -247,13 +247,15 @@ export class SolendAction {
       ASSOCIATED_TOKEN_PROGRAM_ID,
       TOKEN_PROGRAM_ID,
       new PublicKey(tokenInfo.mintAddress),
-      publicKey
+      publicKey,
+      true
     );
     const userCollateralAccountAddress = await Token.getAssociatedTokenAddress(
       ASSOCIATED_TOKEN_PROGRAM_ID,
       TOKEN_PROGRAM_ID,
       new PublicKey(reserve.collateralMintAddress),
-      publicKey
+      publicKey,
+      true
     );
 
     return new SolendAction(
