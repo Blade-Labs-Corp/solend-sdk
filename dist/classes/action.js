@@ -103,8 +103,8 @@ class SolendAction {
                 throw Error(`Obligation already has max number of positions: ${exports.POSITION_LIMIT}`);
             }
             const tokenInfo = getTokenInfo(symbol, solendInfo);
-            const userTokenAccountAddress = yield spl_token_1.Token.getAssociatedTokenAddress(spl_token_1.ASSOCIATED_TOKEN_PROGRAM_ID, spl_token_1.TOKEN_PROGRAM_ID, new web3_js_1.PublicKey(tokenInfo.mintAddress), publicKey);
-            const userCollateralAccountAddress = yield spl_token_1.Token.getAssociatedTokenAddress(spl_token_1.ASSOCIATED_TOKEN_PROGRAM_ID, spl_token_1.TOKEN_PROGRAM_ID, new web3_js_1.PublicKey(reserve.collateralMintAddress), publicKey);
+            const userTokenAccountAddress = yield spl_token_1.Token.getAssociatedTokenAddress(spl_token_1.ASSOCIATED_TOKEN_PROGRAM_ID, spl_token_1.TOKEN_PROGRAM_ID, new web3_js_1.PublicKey(tokenInfo.mintAddress), publicKey, true);
+            const userCollateralAccountAddress = yield spl_token_1.Token.getAssociatedTokenAddress(spl_token_1.ASSOCIATED_TOKEN_PROGRAM_ID, spl_token_1.TOKEN_PROGRAM_ID, new web3_js_1.PublicKey(reserve.collateralMintAddress), publicKey, true);
             return new SolendAction(solendInfo, connection, reserve, lendingMarket, tokenInfo, publicKey, obligationAddress, obligationDetails, userTokenAccountAddress, userCollateralAccountAddress, seed, symbol, distinctReserveCount, amount, depositReserves, borrowReserves, hostAta);
         });
     }
