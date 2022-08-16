@@ -1,7 +1,7 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 import { parsePriceData } from "@pythnetwork/client";
 import { BNumber, getReserveInfo, getTokenInfo } from "./common";
-import { parseReserve, Reserve } from "../state/reserve";
+import { parseReserve, Reserve } from "../dist/state/reserve";
 
 const SOLEND_API_HOST = "https://api.solend.fi";
 
