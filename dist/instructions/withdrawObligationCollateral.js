@@ -30,9 +30,9 @@ exports.withdrawObligationCollateralInstruction = void 0;
 const spl_token_1 = require("@solana/spl-token");
 const web3_js_1 = require("@solana/web3.js");
 const bn_js_1 = __importDefault(require("bn.js"));
-const BufferLayout = __importStar(require("buffer-layout"));
 const Layout = __importStar(require("../utils/layout"));
 const instruction_1 = require("./instruction");
+const BufferLayout = require("buffer-layout");
 /// Withdraw collateral from an obligation. Requires a refreshed obligation and reserve.
 ///
 /// Accounts expected by this instruction:
@@ -65,7 +65,6 @@ const withdrawObligationCollateralInstruction = (collateralAmount, sourceCollate
         { pubkey: lendingMarket, isSigner: false, isWritable: false },
         { pubkey: lendingMarketAuthority, isSigner: false, isWritable: false },
         { pubkey: obligationOwner, isSigner: true, isWritable: false },
-        { pubkey: web3_js_1.SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
         { pubkey: spl_token_1.TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
     ];
     return new web3_js_1.TransactionInstruction({

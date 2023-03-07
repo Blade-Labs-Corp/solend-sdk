@@ -1,13 +1,10 @@
-import {
-  PublicKey,
-  SYSVAR_CLOCK_PUBKEY,
-  TransactionInstruction,
-} from "@solana/web3.js";
+import { PublicKey, TransactionInstruction } from "@solana/web3.js";
 import BN from "bn.js";
-import * as BufferLayout from "buffer-layout";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import * as Layout from "../utils/layout";
 import { LendingInstruction } from "./instruction";
+
+const BufferLayout = require("buffer-layout");
 
 /// Repay borrowed liquidity to a reserve. Requires a refreshed obligation and reserve.
 ///
@@ -55,7 +52,6 @@ export const repayObligationLiquidityInstruction = (
     { pubkey: obligation, isSigner: false, isWritable: true },
     { pubkey: lendingMarket, isSigner: false, isWritable: false },
     { pubkey: transferAuthority, isSigner: true, isWritable: false },
-    { pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
     { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
   ];
   return new TransactionInstruction({

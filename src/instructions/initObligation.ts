@@ -1,12 +1,12 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
   PublicKey,
-  SYSVAR_CLOCK_PUBKEY,
   SYSVAR_RENT_PUBKEY,
   TransactionInstruction,
 } from "@solana/web3.js";
-import * as BufferLayout from "buffer-layout";
 import { LendingInstruction } from "./instruction";
+
+const BufferLayout = require("buffer-layout");
 
 /// Initializes a new lending market obligation.
 ///
@@ -33,7 +33,6 @@ export const initObligationInstruction = (
     { pubkey: obligation, isSigner: false, isWritable: true },
     { pubkey: lendingMarket, isSigner: false, isWritable: false },
     { pubkey: obligationOwner, isSigner: true, isWritable: false },
-    { pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
     { pubkey: SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
     { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
   ];

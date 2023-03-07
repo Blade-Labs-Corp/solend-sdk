@@ -1,7 +1,8 @@
 import BN from "bn.js";
-import * as BufferLayout from "buffer-layout";
+declare const BufferLayout: any;
 export declare const LastUpdateLayout: typeof BufferLayout.Structure;
 export interface LastUpdate {
     slot: BN;
     stale: boolean;
 }
+export {};

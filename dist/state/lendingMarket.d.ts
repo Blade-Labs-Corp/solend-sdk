@@ -1,11 +1,14 @@
 /// <reference types="node" />
 import { AccountInfo, PublicKey } from "@solana/web3.js";
-import * as BufferLayout from "buffer-layout";
+declare const BufferLayout: any;
 export interface LendingMarket {
     version: number;
-    isInitialized: boolean;
+    bumpSeed: number;
+    owner: PublicKey;
     quoteTokenMint: PublicKey;
     tokenProgramId: PublicKey;
+    oracleProgramId: PublicKey;
+    switchboardOracleProgramId: PublicKey;
 }
 export declare const LendingMarketLayout: typeof BufferLayout.Structure;
 export declare const LENDING_MARKET_SIZE: any;
@@ -21,3 +24,4 @@ export declare const parseLendingMarket: (pubkey: PublicKey, info: AccountInfo<B
     };
     info: LendingMarket;
 };
+export {};

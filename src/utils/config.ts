@@ -1,5 +1,5 @@
 import {Connection, PublicKey} from "@solana/web3.js";
-import {ConfigType} from "../classes";
+import {ConfigType, CustomEnviromentConfigType, MarketConfigType} from "../classes";
 import base58 from "bs58";
 
 export type LendingReserveData = {
@@ -17,14 +17,17 @@ const reserveOffsets = {
 	switchboardAddress: 139,
 	collateralMintAddress: 227,
 	collateralSupplyAddress: 267,
+	depositLimit: 323,
+	borrowLimit: 331,
 	liquidityFeeReceiverAddress: 339
 };
 
-export async function generateConfig(
+export async function generateCustomEnviromentConfig(
 	connection: Connection,
 	marketName: string,
+	marketDescription: string,
 	reserveAccountData: LendingReserveData[]
-): Promise<ConfigType> {
+): Promise<CustomEnviromentConfigType> {
 	let {owner: lendingProgram, data} = (await connection.getAccountInfo(reserveAccountData[0].reserve))!;
 	const lendingMarketAcc = new PublicKey(data.subarray(10, 10 + 32));
 	data = (await connection.getAccountInfo(lendingMarketAcc))!.data;
@@ -40,83 +43,88 @@ export async function generateConfig(
 		[lendingMarketAcc.toBuffer(), Buffer.from([marketAuthBumpSeed])],
 		lendingProgram
 	);
-
-	const config: ConfigType = {
-		programID: lendingProgram.toBase58(),
-		assets: [],
-		markets: [{
-			name: marketName,
-			isPrimary: true,
-			address: lendingMarketAcc.toBase58(),
-			authorityAddress: marketAuthority.toBase58(),
-			reserves: []
-		}],
-		oracles: {
-			pythProgramID: pythProgramId.toBase58(),
-			switchboardProgramID: switchboardProgramId.toBase58(),
-			assets: []
-		}
-	};
-	const assets = config.assets;
-	const reserves = config.markets[0].reserves;
-	const oracleAssets = config.oracles.assets;
+	const marketConfig: MarketConfigType = {
+		name: marketName,
+		isPrimary: false,
+		description: marketDescription,
+		creator: "nu11111111111111111111111111111111111111111", // doesn't matter right now
+		address: lendingMarketAcc.toBase58(),
+		hidden: false,
+		authorityAddress: marketAuthority.toBase58(),
+		reserves: []
+	}
 	for(i = 0; i < reserveAccountData.length; i += 1){
 		const reserveAccData = reserveAccountData[i];
 		const {data: reserveData} = (await connection.getAccountInfo(reserveAccData.reserve))!;
-		assets.push({
-			name: reserveAccData.name,
-			symbol: reserveAccData.symbol,
-			decimals: reserveAccData.decimals,
-			mintAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.tokenMintAddress,
-					reserveOffsets.tokenMintAddress + 32
+		marketConfig.reserves.push(
+			{
+				liquidityToken: {
+					mint: base58.encode(
+						reserveData.subarray(
+							reserveOffsets.tokenMintAddress,
+							reserveOffsets.tokenMintAddress + 32
+						)
+					),
+					name: reserveAccData.name,
+					symbol: reserveAccData.symbol,
+					decimals: reserveAccData.decimals,
+					// Not important for what we're using a custom env for
+					coingeckoID: "",
+					logo: "",
+					// No idea why this is defined as a number when the API returns a string
+					volume24h: 1
+				},
+				address: reserveAccData.reserve.toBase58(),
+				pythOracle: base58.encode(
+					reserveData.subarray(
+						reserveOffsets.pythAddress,
+						reserveOffsets.pythAddress + 32
+					)
+				),
+				switchboardOracle: base58.encode(
+					reserveData.subarray(
+						reserveOffsets.switchboardAddress,
+						reserveOffsets.switchboardAddress + 32
+					)
+				),
+				collateralMintAddress: base58.encode(
+					reserveData.subarray(
+						reserveOffsets.collateralMintAddress,
+						reserveOffsets.collateralMintAddress + 32
+					)
+				),
+				collateralSupplyAddress: base58.encode(
+					reserveData.subarray(
+						reserveOffsets.collateralSupplyAddress,
+						reserveOffsets.collateralSupplyAddress + 32
+					)
+				),
+				liquidityAddress: base58.encode(
+					reserveData.subarray(
+						reserveOffsets.liquidityAddress,
+						reserveOffsets.liquidityAddress + 32
+					)
+				),
+				liquidityFeeReceiverAddress: base58.encode(
+					reserveData.subarray(
+						reserveOffsets.liquidityFeeReceiverAddress,
+						reserveOffsets.liquidityFeeReceiverAddress + 32
+					)
+				),
+				// No idea why these are numbers when the API returns strings
+				userBorrowCap: Number(
+					reserveData.readBigUInt64LE(reserveOffsets.borrowLimit)
+				),
+				userSupplyCap: Number(
+					reserveData.readBigUInt64LE(reserveOffsets.depositLimit)
 				)
-			)
-		});
-		reserves.push({
-			asset: reserveAccData.symbol,
-			address: reserveAccData.reserve.toBase58(),
-			collateralMintAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.collateralMintAddress,
-					reserveOffsets.collateralMintAddress + 32
-				)
-			),
-			collateralSupplyAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.collateralSupplyAddress,
-					reserveOffsets.collateralSupplyAddress + 32
-				)
-			),
-			liquidityAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.liquidityAddress,
-					reserveOffsets.liquidityAddress + 32
-				)
-			),
-			liquidityFeeReceiverAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.liquidityFeeReceiverAddress,
-					reserveOffsets.liquidityFeeReceiverAddress + 32
-				)
-			)
-		});
-		oracleAssets.push({
-			asset: reserveAccData.symbol,
-			priceAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.pythAddress,
-					reserveOffsets.pythAddress + 32
-				)
-			),
-			switchboardFeedAddress: base58.encode(
-				reserveData.subarray(
-					reserveOffsets.switchboardAddress,
-					reserveOffsets.switchboardAddress + 32
-				)
-			)
-		});
+			}
+		)
 	}
-	return config;
+	return {
+		pythProgramID: pythProgramId.toBase58(),
+		switchboardProgramID: switchboardProgramId.toBase58(),
+		programID: lendingProgram.toBase58(),
+		marketConfigs: [marketConfig]
+	};
 };

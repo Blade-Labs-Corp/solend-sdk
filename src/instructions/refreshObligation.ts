@@ -1,8 +1,4 @@
-import {
-  PublicKey,
-  SYSVAR_CLOCK_PUBKEY,
-  TransactionInstruction,
-} from "@solana/web3.js";
+import { PublicKey, TransactionInstruction } from "@solana/web3.js";
 import BufferLayout from "buffer-layout";
 import { LendingInstruction } from "./instruction";
 
@@ -30,10 +26,7 @@ export const refreshObligationInstruction = (
     data
   );
 
-  const keys = [
-    { pubkey: obligation, isSigner: false, isWritable: true },
-    { pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
-  ];
+  const keys = [{ pubkey: obligation, isSigner: false, isWritable: true }];
 
   depositReserves.forEach((depositReserve) =>
     keys.push({

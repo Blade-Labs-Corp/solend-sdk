@@ -1,8 +1,8 @@
 /// <reference types="node" />
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
-import * as BufferLayout from "buffer-layout";
 import { LastUpdate } from "./lastUpdate";
+declare const BufferLayout: any;
 export interface Obligation {
     version: number;
     lastUpdate: LastUpdate;
@@ -56,3 +56,4 @@ export declare const parseObligation: (pubkey: PublicKey, info: AccountInfo<Buff
     };
     info: Obligation;
 } | null;
+export {};

@@ -28,3 +28,7 @@ __exportStar(require("./withdrawObligationCollateralAndRedeemReserveLiquidity"),
 __exportStar(require("./syncNative"), exports);
 __exportStar(require("./initLendingMarket"), exports);
 __exportStar(require("./initReserve"), exports);
+__exportStar(require("./updateReserveConfig"), exports);
+__exportStar(require("./flashBorrowReserveLiquidity"), exports);
+__exportStar(require("./flashRepayReserveLiquidity"), exports);
+__exportStar(require("./instruction"), exports);

@@ -1,9 +1,9 @@
 /// <reference types="node" />
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
-import * as BufferLayout from "buffer-layout";
 import { Buffer } from "buffer";
 import { LastUpdate } from "./lastUpdate";
+declare const BufferLayout: any;
 export interface Reserve {
     version: number;
     lastUpdate: LastUpdate;
@@ -17,12 +17,13 @@ export interface ReserveLiquidity {
     mintDecimals: number;
     supplyPubkey: PublicKey;
     oracleOption: number;
-    pythOraclePubkey: PublicKey;
-    switchboardOraclePubkey: PublicKey;
+    pythOracle: PublicKey;
+    switchboardOracle: PublicKey;
     availableAmount: BN;
     borrowedAmountWads: BN;
     cumulativeBorrowRateWads: BN;
     marketPrice: BN;
+    accumulatedProtocolFeesWads: BN;
 }
 export interface ReserveCollateral {
     mintPubkey: PublicKey;
@@ -44,6 +45,9 @@ export interface ReserveConfig {
     };
     depositLimit: BN;
     borrowLimit: BN;
+    feeReceiver: PublicKey;
+    protocolLiquidationFee: number;
+    protocolTakeRate: number;
 }
 export declare const ReserveConfigLayout: any;
 export declare const ReserveLayout: typeof BufferLayout.Structure;
@@ -61,3 +65,4 @@ export declare const parseReserve: (pubkey: PublicKey, info: AccountInfo<Buffer>
     info: Reserve;
 } | null;
 export declare function reserveToString(reserve: Reserve): string;
+export {};

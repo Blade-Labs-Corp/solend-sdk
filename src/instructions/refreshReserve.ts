@@ -1,10 +1,7 @@
-import {
-  PublicKey,
-  SYSVAR_CLOCK_PUBKEY,
-  TransactionInstruction,
-} from "@solana/web3.js";
-import * as BufferLayout from "buffer-layout";
+import { PublicKey, TransactionInstruction } from "@solana/web3.js";
 import { LendingInstruction } from "./instruction";
+
+const BufferLayout = require("buffer-layout");
 
 /// Accrue interest and update market price of liquidity on a reserve.
 ///
@@ -39,11 +36,6 @@ export const refreshReserveInstruction = (
     });
   }
 
-  keys.push({
-    pubkey: SYSVAR_CLOCK_PUBKEY,
-    isSigner: false,
-    isWritable: false,
-  });
   return new TransactionInstruction({
     keys,
     programId: solendProgramAddress,

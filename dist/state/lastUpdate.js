@@ -24,6 +24,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LastUpdateLayout = void 0;
-const BufferLayout = __importStar(require("buffer-layout"));
 const Layout = __importStar(require("../utils/layout"));
+const BufferLayout = require("buffer-layout");
 exports.LastUpdateLayout = BufferLayout.struct([Layout.uint64("slot"), BufferLayout.u8("stale")], "lastUpdate");

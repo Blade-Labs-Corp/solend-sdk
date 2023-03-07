@@ -24,8 +24,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseLendingMarket = exports.isLendingMarket = exports.LENDING_MARKET_SIZE = exports.LendingMarketLayout = void 0;
-const BufferLayout = __importStar(require("buffer-layout"));
 const Layout = __importStar(require("../utils/layout"));
+const BufferLayout = require("buffer-layout");
 exports.LendingMarketLayout = BufferLayout.struct([
     BufferLayout.u8("version"),
     BufferLayout.u8("bumpSeed"),

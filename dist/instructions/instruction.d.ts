@@ -15,7 +15,9 @@ export declare enum LendingInstruction {
     FlashLoan = 13,
     DepositReserveLiquidityAndObligationCollateral = 14,
     WithdrawObligationCollateralAndRedeemReserveLiquidity = 15,
-    UpdateReserveConfig = 16
+    UpdateReserveConfig = 16,
+    FlashBorrowReserveLiquidity = 19,
+    FlashRepayReserveLiquidity = 20
 }
 /** Instructions defined by the program */
 export declare enum TokenInstruction {

@@ -20,6 +20,8 @@ var LendingInstruction;
     LendingInstruction[LendingInstruction["DepositReserveLiquidityAndObligationCollateral"] = 14] = "DepositReserveLiquidityAndObligationCollateral";
     LendingInstruction[LendingInstruction["WithdrawObligationCollateralAndRedeemReserveLiquidity"] = 15] = "WithdrawObligationCollateralAndRedeemReserveLiquidity";
     LendingInstruction[LendingInstruction["UpdateReserveConfig"] = 16] = "UpdateReserveConfig";
+    LendingInstruction[LendingInstruction["FlashBorrowReserveLiquidity"] = 19] = "FlashBorrowReserveLiquidity";
+    LendingInstruction[LendingInstruction["FlashRepayReserveLiquidity"] = 20] = "FlashRepayReserveLiquidity";
 })(LendingInstruction = exports.LendingInstruction || (exports.LendingInstruction = {}));
 /** Instructions defined by the program */
 var TokenInstruction;

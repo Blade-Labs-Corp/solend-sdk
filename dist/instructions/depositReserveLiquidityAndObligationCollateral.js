@@ -30,9 +30,9 @@ exports.depositReserveLiquidityAndObligationCollateralInstruction = void 0;
 const spl_token_1 = require("@solana/spl-token");
 const web3_js_1 = require("@solana/web3.js");
 const bn_js_1 = __importDefault(require("bn.js"));
-const BufferLayout = __importStar(require("buffer-layout"));
 const Layout = __importStar(require("../utils/layout"));
 const instruction_1 = require("./instruction");
+const BufferLayout = require("buffer-layout");
 /// Deposit liquidity into a reserve in exchange for collateral, and deposit the collateral as well.
 const depositReserveLiquidityAndObligationCollateralInstruction = (liquidityAmount, sourceLiquidity, sourceCollateral, reserve, reserveLiquiditySupply, reserveCollateralMint, lendingMarket, lendingMarketAuthority, destinationCollateral, obligation, obligationOwner, pythOracle, switchboardFeedAddress, transferAuthority, solendProgramAddress) => {
     const dataLayout = BufferLayout.struct([
@@ -58,7 +58,6 @@ const depositReserveLiquidityAndObligationCollateralInstruction = (liquidityAmou
         { pubkey: pythOracle, isSigner: false, isWritable: false },
         { pubkey: switchboardFeedAddress, isSigner: false, isWritable: false },
         { pubkey: transferAuthority, isSigner: true, isWritable: false },
-        { pubkey: web3_js_1.SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
         { pubkey: spl_token_1.TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
     ];
     return new web3_js_1.TransactionInstruction({

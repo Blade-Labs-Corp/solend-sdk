@@ -1,15 +1,15 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
   PublicKey,
-  SYSVAR_CLOCK_PUBKEY,
   SYSVAR_RENT_PUBKEY,
   TransactionInstruction,
 } from "@solana/web3.js";
-import * as BufferLayout from "buffer-layout";
 import BN from "bn.js";
 import * as Layout from "../utils/layout";
 import { ReserveConfig, ReserveConfigLayout } from "../state";
 import { LendingInstruction } from "./instruction";
+
+const BufferLayout = require("buffer-layout");
 
 export const initReserveInstruction = (
   liquidityAmount: number | BN,
@@ -20,10 +20,11 @@ export const initReserveInstruction = (
   liquidityMint: PublicKey,
   liquiditySupply: PublicKey,
   liquidityFeeReceiver: PublicKey,
-  pythProduct: PublicKey,
-  pythPrice: PublicKey,
   collateralMint: PublicKey,
   collateralSupply: PublicKey,
+  pythProduct: PublicKey,
+  pythPrice: PublicKey,
+  switchboardFeed: PublicKey,
   lendingMarket: PublicKey,
   lendingMarketAuthority: PublicKey,
   lendingMarketOwner: PublicKey,
@@ -57,11 +58,11 @@ export const initReserveInstruction = (
     { pubkey: collateralSupply, isSigner: false, isWritable: true },
     { pubkey: pythProduct, isSigner: false, isWritable: false },
     { pubkey: pythPrice, isSigner: false, isWritable: false },
+    { pubkey: switchboardFeed, isSigner: false, isWritable: false },
     { pubkey: lendingMarket, isSigner: false, isWritable: true },
     { pubkey: lendingMarketAuthority, isSigner: false, isWritable: false },
     { pubkey: lendingMarketOwner, isSigner: true, isWritable: false },
     { pubkey: transferAuthority, isSigner: true, isWritable: false },
-    { pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
     { pubkey: SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false },
     { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
   ];

@@ -1,16 +1,13 @@
 import { Connection, PublicKey, Transaction, TransactionInstruction, TransactionSignature } from "@solana/web3.js";
-import { Obligation } from "../state/obligation";
-import { AssetType, ReserveType, MarketType, ConfigType, EnviromentConfig, OracleAssetType } from "./types";
 import BN from "bn.js";
-export declare const POSITION_LIMIT = 6;
-export declare type ActionType = "deposit" | "borrow" | "withdraw" | "repay" | "mint" | "redeem" | "depositCollateral";
+import { Obligation } from "../state/obligation";
+import { ReserveConfigType, MarketConfigType, EnviromentConfig } from "./shared";
+import { ActionType } from "../core";
 export declare class SolendAction {
-    solendInfo: ConfigType;
+    programId: PublicKey;
     connection: Connection;
-    oracleInfo: OracleAssetType;
-    reserve: ReserveType;
-    lendingMarket: MarketType;
-    tokenInfo: AssetType;
+    reserve: ReserveConfigType;
+    lendingMarket: MarketConfigType;
     publicKey: PublicKey;
     obligationAddress: PublicKey;
     obligationAccountInfo: Obligation | null;
@@ -42,7 +39,7 @@ export declare class SolendAction {
         lendingTxn: Transaction | null;
         postLendingTxn: Transaction | null;
     }>;
-    sendTransactions(sendTransaction: (txn: Transaction, connection: Connection) => Promise<TransactionSignature>): Promise<string>;
+    sendTransactions(sendTransaction: (txn: Transaction, connection: Connection) => Promise<TransactionSignature>, preCallback?: () => void, lendingCallback?: () => void, postCallback?: () => void): Promise<string>;
     private sendSingleTransaction;
     addDepositIx(): void;
     addDepositReserveLiquidityIx(): void;

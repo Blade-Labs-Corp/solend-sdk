@@ -28,9 +28,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseObligation = exports.isObligation = exports.OBLIGATION_SIZE = exports.ObligationLiquidityLayout = exports.ObligationCollateralLayout = exports.ObligationLayout = exports.obligationToString = void 0;
 const bn_js_1 = __importDefault(require("bn.js"));
-const BufferLayout = __importStar(require("buffer-layout"));
 const Layout = __importStar(require("../utils/layout"));
 const lastUpdate_1 = require("./lastUpdate");
+const BufferLayout = require("buffer-layout");
 // BN defines toJSON property, which messes up serialization
 // @ts-ignore
 bn_js_1.default.prototype.toJSON = undefined;

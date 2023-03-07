@@ -21,10 +21,7 @@ const refreshObligationInstruction = (obligation, depositReserves, borrowReserve
     const dataLayout = buffer_layout_1.default.struct([buffer_layout_1.default.u8("instruction")]);
     const data = Buffer.alloc(dataLayout.span);
     dataLayout.encode({ instruction: instruction_1.LendingInstruction.RefreshObligation }, data);
-    const keys = [
-        { pubkey: obligation, isSigner: false, isWritable: true },
-        { pubkey: web3_js_1.SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
-    ];
+    const keys = [{ pubkey: obligation, isSigner: false, isWritable: true }];
     depositReserves.forEach((depositReserve) => keys.push({
         pubkey: depositReserve,
         isSigner: false,

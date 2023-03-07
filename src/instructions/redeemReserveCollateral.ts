@@ -1,13 +1,10 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import {
-  PublicKey,
-  SYSVAR_CLOCK_PUBKEY,
-  TransactionInstruction,
-} from "@solana/web3.js";
+import { PublicKey, TransactionInstruction } from "@solana/web3.js";
 import BN from "bn.js";
-import * as BufferLayout from "buffer-layout";
 import * as Layout from "../utils/layout";
 import { LendingInstruction } from "./instruction";
+
+const BufferLayout = require("buffer-layout");
 
 /// Redeem collateral from a reserve in exchange for liquidity.
 ///
@@ -59,7 +56,6 @@ export const redeemReserveCollateralInstruction = (
     { pubkey: lendingMarket, isSigner: false, isWritable: false },
     { pubkey: lendingMarketAuthority, isSigner: false, isWritable: false },
     { pubkey: transferAuthority, isSigner: true, isWritable: false },
-    { pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false },
     { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
   ];
   return new TransactionInstruction({
