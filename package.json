@@ -1,7 +1,6 @@
 {
-  "name": "@solendprotocol/solend-sdk",
-  "version": "0.6.9+blade_labs",
-  "private": true,
+  "name": "@blade-labs/solend-sdk",
+  "version": "0.6.9",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -62,5 +61,8 @@
     "typedoc-plugin-cname": "^1.0.1",
     "typescript": "^4.5.2",
     "typescript-eslint": "^0.0.1-alpha.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.blade.so"
   }
 }
